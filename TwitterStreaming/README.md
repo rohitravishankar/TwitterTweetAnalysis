@@ -8,7 +8,7 @@ The stars we are considering for our analysis are:
 1. Shawn Mendes, Katy Perry, Ariana Grande, Taylor Swift and Justin Bieber
 2. Kevin Durant, Floyd Mayweather, Tom Brady, Lebron James and Serena Williams
 
-## How to run the API
+## How to run the microservice
 To run the microservice, you need to visit: `https://localhost:5000`
 
 The swagger UI page clearly lists the post request that the API takes and the parameters. The parameters read include
