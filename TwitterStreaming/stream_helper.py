@@ -41,7 +41,7 @@ class TwitterStreamer:
         stream = tweepy.Stream(auth, listener)
 
         # This line filter Twitter Streams to capture data by the keywords:
-        stream.filter(track=self.hash_tag_list)
+        stream.filter(track=self.hash_tag_list, stall_warnings=True)
 
 
 class StdOutListener(tweepy.StreamListener):
@@ -56,7 +56,7 @@ class StdOutListener(tweepy.StreamListener):
     def on_data(self, data):
         try:
             self.producer.send(self.topic_name, value=data)
-            sleep(1)
+            # sleep(3)
             print(data)
             return data
         except BaseException as e:
