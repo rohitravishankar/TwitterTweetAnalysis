@@ -9,8 +9,8 @@ import tweepy
 import os
 import logging
 import json
-from time import sleep
 from kafka import KafkaProducer
+from http.client import IncompleteRead
 
 # Credentials to access Twitter Streaming Data
 CONSUMER_KEY = os.environ['CONSUMER_KEY']
@@ -40,8 +40,17 @@ class TwitterStreamer:
         auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
         stream = tweepy.Stream(auth, listener)
 
-        # This line filter Twitter Streams to capture data by the keywords:
-        stream.filter(track=self.hash_tag_list, stall_warnings=True)
+        while True:
+            try:
+                # This line filter Twitter Streams to capture data by the keywords:
+                stream.filter(track=self.hash_tag_list, stall_warnings=True)
+            except IncompleteRead:
+                # If my consumer falls behind don't error out but continue
+                continue
+            except KeyboardInterrupt:
+                # Or however you want to exit this loop
+                stream.disconnect()
+                break
 
 
 class StdOutListener(tweepy.StreamListener):
