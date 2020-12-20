@@ -1,0 +1,6 @@
+.idea
+.DS_Store
+__pycache__
+TwitterStreaming/.gitignore
+Store_Tweets/.gitignore
+
