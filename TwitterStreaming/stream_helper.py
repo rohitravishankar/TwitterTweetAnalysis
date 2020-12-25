@@ -36,8 +36,8 @@ class TwitterStreamer:
         """
         # This handles Twitter authentication and the connection to Twitter Streaming API
         listener = StdOutListener(self.topic_name)
-        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-        auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+        auth = tweepy.OAuthHandler(CONSUMER_KEY.encode("utf-8"), CONSUMER_SECRET.encode("utf-8"))
+        auth.set_access_token(ACCESS_TOKEN.encode("utf-8"), ACCESS_TOKEN_SECRET.encode("utf-8"))
         stream = tweepy.Stream(auth, listener)
 
         # This line filter Twitter Streams to capture data by the keywords:
